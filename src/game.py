@@ -1,7 +1,7 @@
 import pygame
-import random
-
+from random import *
 from unit import *
+from case import *
 
 
 class Game:
@@ -29,12 +29,50 @@ class Game:
             La surface de la fenêtre du jeu.
         """
         self.screen = screen
-        self.player_units = [Unit(0, 0, 10, 2, 'player'),
-                             Unit(1, 0, 10, 2, 'player')]
+        self.player_units = [Unit(3, 1, 10, 2, 'player','soldat'),
+                             Unit(1, 3, 10, 2, 'player','helico')]
 
-        self.enemy_units = [Unit(6, 6, 8, 1, 'enemy'),
-                            Unit(7, 6, 8, 1, 'enemy')]
+        self.enemy_units = [Unit(11, 10, 8, 1, 'enemy','char'),
+                            Unit(10, 13, 8, 1, 'enemy','soldat')]
+        
+        # Liste des maps avec un terrain spécifique
+        self.maps = [
+            { # Map 1
+                "terrain": "images/terrain_herbe.webp",  # Terrain de la map
+                "cases": [  # Cases spécifiques de la map
+                    Case(5, 5, 'mur'), Case(4, 5, 'mur'),
+                    Case(0, 0, 'flag1'), Case(15, 15, 'flag2'),
+                    Case(10, 10, 'buisson'), Case(3, 6, 'arbre')
+                ]
+            },
+            { # Map 2
+                "terrain": "images/terrain_sables.png",
+                "cases": [
+                    Case(0, 0, 'dune'), Case(3, 0, 'dune'), Case(6, 0, 'dune'), Case(9, 0, 'dune'),Case(12, 0, 'dune'),
+                    Case(2, 1, 'flag1'), Case(14, 10, 'flag2'),
+                    Case(3, 9, 'dune2'), Case(3, 8, 'dune2'),Case(10, 3, 'dune2'), Case(10, 4, 'dune2'),
+                    Case(13, 13, 'palmier'), Case(8, 8, 'palmier')
+                ]
+            }
+            ,
+            { # Map 3
+                "terrain": "images/terrain_neige.png",
+                "cases": [
+                    Case(6, 6, 'mur'), Case(7, 6, 'mur'),
+                    Case(0, 7, 'flag1'), Case(15, 7, 'flag2'),
+                    Case(5, 5, 'buisson'), Case(4, 4, 'arbre')
+                ]
+            }
+        ]
 
+        # Sélection d'une map aléatoire
+        self.current_map = random.choice(self.maps)
+
+    def draw_map(self):
+        """Affiche les cases spécifiques de la map actuelle."""
+        for case in self.current_map["cases"]:
+            case.draw(self.screen)
+            
     def handle_player_turn(self):
         """Tour du joueur"""
         for selected_unit in self.player_units:
@@ -100,12 +138,23 @@ class Game:
     def flip_display(self):
         """Affiche le jeu."""
 
-        # Affiche la grille
-        self.screen.fill(BLACK)
+        # Charger et afficher le terrain de la map
+        try:
+            terrain_image = pygame.image.load(self.current_map["terrain"])
+            terrain_image = pygame.transform.scale(terrain_image, (CELL_SIZE, CELL_SIZE))  # Adapter la taille à une cellule
+        except pygame.error as e:
+            print(f"Erreur lors du chargement de l'image du terrain : {e}")
+            pygame.quit()
+            exit()
+
+        # Dessiner le terrain sur toute la grille
         for x in range(0, WIDTH, CELL_SIZE):
             for y in range(0, HEIGHT, CELL_SIZE):
-                rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
-                pygame.draw.rect(self.screen, WHITE, rect, 1)
+                self.screen.blit(terrain_image, (x, y))
+
+
+        # Affiche les cases spécifiques de la map
+        self.draw_map()
 
         # Affiche les unités
         for unit in self.player_units + self.enemy_units:
@@ -113,7 +162,7 @@ class Game:
 
         # Rafraîchit l'écran
         pygame.display.flip()
-
+        
 
 def main():
 
@@ -123,6 +172,28 @@ def main():
     # Instanciation de la fenêtre
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Mon jeu de stratégie")
+    
+    # Charger les fresque
+    try:
+        fresque = pygame.image.load("images/fresque.png")
+        fresque = pygame.transform.scale(fresque, (WIDTH,0.77*HEIGHT))  
+    except pygame.error as e:
+        print(f"Erreur lors du chargement de l'image : {e}")
+        return
+
+    # Afficher la fresque
+    screen.blit(fresque, (0, 0))
+    pygame.display.flip()
+
+    # Attendre qu'une touche soit pressée
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.KEYDOWN:
+                waiting = False
 
     # Instanciation du jeu
     game = Game(screen)

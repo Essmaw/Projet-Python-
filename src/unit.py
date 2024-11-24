@@ -2,9 +2,9 @@ import pygame
 import random
 
 # Constantes
-GRID_SIZE = 8
-CELL_SIZE = 60
-WIDTH = GRID_SIZE * CELL_SIZE
+GRID_SIZE = 16
+CELL_SIZE = 50
+WIDTH = (GRID_SIZE * CELL_SIZE)
 HEIGHT = GRID_SIZE * CELL_SIZE
 FPS = 30
 WHITE = (255, 255, 255)
@@ -31,6 +31,8 @@ class Unit:
         La puissance d'attaque de l'unité.
     team : str
         L'équipe de l'unité ('player' ou 'enemy').
+    deplacement :
+        Moyen de déplacement de l'unité ('soldat' ou 'helico' ou 'char').
     is_selected : bool
         Si l'unité est sélectionnée ou non.
 
@@ -44,7 +46,7 @@ class Unit:
         Dessine l'unité sur la grille.
     """
 
-    def __init__(self, x, y, health, attack_power, team):
+    def __init__(self, x, y, health, attack_power, team, deplacement):
         """
         Construit une unité avec une position, une santé, une puissance d'attaque et une équipe.
 
@@ -60,12 +62,15 @@ class Unit:
             La puissance d'attaque de l'unité.
         team : str
             L'équipe de l'unité ('player' ou 'enemy').
+        deplacement : str
+            Moyen de déplacement de l'unité ('soldat' ou 'helico' ou 'char').
         """
         self.x = x
         self.y = y
         self.health = health
         self.attack_power = attack_power
         self.team = team  # 'player' ou 'enemy'
+        self.deplacement = deplacement  # 'soldat' ou 'helico' ou 'char'
         self.is_selected = False
 
     def move(self, dx, dy):
@@ -81,9 +86,27 @@ class Unit:
 
     def draw(self, screen):
         """Affiche l'unité sur l'écran."""
-        color = BLUE if self.team == 'player' else RED
-        if self.is_selected:
-            pygame.draw.rect(screen, GREEN, (self.x * CELL_SIZE,
-                             self.y * CELL_SIZE, CELL_SIZE, CELL_SIZE))
-        pygame.draw.circle(screen, color, (self.x * CELL_SIZE + CELL_SIZE //
-                           2, self.y * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
+
+        # Afficher les soldats
+        if self.deplacement == 'soldat':
+            soldat = pygame.image.load("images/soldat.png")
+            soldat = pygame.transform.scale(soldat,  (2*CELL_SIZE, 2*CELL_SIZE))  
+            screen.blit(soldat, (self.x * CELL_SIZE,
+                             self.y * CELL_SIZE))
+            pygame.display.flip()
+
+        # Afficher les helico
+        elif self.deplacement == 'helico':
+            helico = pygame.image.load("images/helico.png")
+            helico = pygame.transform.scale(helico,  (3*CELL_SIZE, 3*CELL_SIZE)) 
+            screen.blit(helico, (self.x * CELL_SIZE,
+                             self.y * CELL_SIZE))
+            pygame.display.flip()
+
+        # Afficher les tank
+        elif self.deplacement == 'char':
+            char = pygame.image.load("images/char.png")
+            char = pygame.transform.scale(char,  (3*CELL_SIZE, 3*CELL_SIZE)) 
+            screen.blit(char,(self.x * CELL_SIZE,
+                             self.y * CELL_SIZE))
+            pygame.display.flip()
