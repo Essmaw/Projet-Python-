@@ -4,8 +4,6 @@ import random
 # Constantes
 GRID_SIZE = 16
 CELL_SIZE = 50
-WIDTH = (GRID_SIZE * CELL_SIZE)
-HEIGHT = GRID_SIZE * CELL_SIZE
 FPS = 30
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -92,6 +90,14 @@ class Unit:
             soldat = pygame.image.load("images/soldat.png")
             soldat = pygame.transform.scale(soldat,  (2*CELL_SIZE, 2*CELL_SIZE))  
             screen.blit(soldat, (self.x * CELL_SIZE,
+                             self.y * CELL_SIZE))
+            pygame.display.flip()
+
+        # Afficher les medecin
+        if self.deplacement == 'medecin':
+            medecin = pygame.image.load("images/medecin.png")
+            medecin  = pygame.transform.scale(medecin ,  (4*CELL_SIZE, 2*CELL_SIZE))  
+            screen.blit(medecin , (self.x * CELL_SIZE,
                              self.y * CELL_SIZE))
             pygame.display.flip()
 
