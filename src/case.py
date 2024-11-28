@@ -128,12 +128,19 @@ class Case:
         # Afficher les dunes
         elif self.propriete == 'dune2':
             dune = pygame.image.load("images/dune2.png")
-            dune = pygame.transform.scale(dune,  (3*CELL_SIZE, 3*CELL_SIZE))  
+            dune = pygame.transform.scale(dune,  (3*CELL_SIZE, 2*CELL_SIZE))  
             screen.blit(dune, (self.x * CELL_SIZE,
                                 self.y * CELL_SIZE))
             pygame.display.flip()
 
-        # Afficher les palmiers
+        elif self.propriete == 'tente':
+            tente = pygame.image.load("images/tente.png")
+            tente = pygame.transform.scale(tente,  (6*CELL_SIZE, 3*CELL_SIZE))  
+            screen.blit(tente, (self.x * CELL_SIZE,
+                                self.y * CELL_SIZE))
+            pygame.display.flip()
+
+        # Afficher les oasis
         elif self.propriete == 'oasis':
             palmier = pygame.image.load("images/oasis.webp")
             palmier = pygame.transform.scale(palmier,  (3*CELL_SIZE, 3*CELL_SIZE))  
@@ -150,3 +157,46 @@ class Case:
                                 self.y * CELL_SIZE))
             pygame.display.flip()
         
+
+        # Map neige
+        # Afficher les sapin
+        elif self.propriete == 'sapin':
+            sapin = pygame.image.load("images/sapin.png")
+            sapin = pygame.transform.scale(sapin,  (3*CELL_SIZE, 2*CELL_SIZE))  
+            screen.blit(sapin, (self.x * CELL_SIZE,
+                                self.y * CELL_SIZE))
+            pygame.display.flip()
+        # Afficher les bonhomme de neige 
+        elif self.propriete == 'bonhomme':
+            bonhomme = pygame.image.load("images/bonhomme.png")
+            bonhomme = pygame.transform.scale(bonhomme,  (2*CELL_SIZE, 2*CELL_SIZE))  
+            screen.blit(bonhomme, (self.x * CELL_SIZE,
+                                self.y * CELL_SIZE))
+            pygame.display.flip()
+
+        # Afficher les feu
+        elif self.propriete == 'feu':
+            feu = pygame.image.load("images/feu.png")
+            feu = pygame.transform.scale(feu,  (3*CELL_SIZE, 2*CELL_SIZE))  
+            screen.blit(feu, (self.x * CELL_SIZE,
+                                self.y * CELL_SIZE))
+            pygame.display.flip()
+
+      
+
+        # Afficher les glacier
+        elif self.propriete == 'glace':
+            glace = pygame.image.load("images/glace.png")
+            glace  = pygame.transform.scale(glace ,  (2*CELL_SIZE, 2*CELL_SIZE))  
+            screen.blit(glace , (self.x * CELL_SIZE,
+                                self.y * CELL_SIZE))
+            pygame.display.flip()
+        
+        
+        # Afficher les montagnes
+        elif self.propriete == 'montagne':
+            montagne = pygame.image.load("images/montagne.png")
+            montagne = pygame.transform.scale(montagne,  (5*CELL_SIZE, 2*CELL_SIZE))  
+            screen.blit(montagne, (self.x * CELL_SIZE,
+                                self.y * CELL_SIZE))
+            pygame.display.flip()

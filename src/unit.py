@@ -96,7 +96,7 @@ class Unit:
         # Afficher les medecin
         if self.deplacement == 'medecin':
             medecin = pygame.image.load("images/medecin.png")
-            medecin  = pygame.transform.scale(medecin ,  (4*CELL_SIZE, 2*CELL_SIZE))  
+            medecin  = pygame.transform.scale(medecin ,  (2*CELL_SIZE,2*CELL_SIZE))  
             screen.blit(medecin , (self.x * CELL_SIZE,
                              self.y * CELL_SIZE))
             pygame.display.flip()
