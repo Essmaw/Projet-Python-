@@ -3,8 +3,6 @@ import pygame
 # Constantes
 GRID_SIZE = 16
 CELL_SIZE = 50
-WIDTH = (GRID_SIZE * CELL_SIZE)
-HEIGHT = GRID_SIZE * CELL_SIZE
 FPS = 30
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -133,7 +131,15 @@ sa distance restante.
             soldat = pygame.transform.scale(soldat, ( 2*(CELL_SIZE-1), 2*(CELL_SIZE-1)))
             screen.blit(soldat, (self.x * CELL_SIZE, self.y * CELL_SIZE))
 
-        # Afficher les hélicoptères
+        # Afficher les medecin
+        if self.deplacement == 'medecin':
+            medecin = pygame.image.load("images/medecin.png")
+            medecin  = pygame.transform.scale(medecin ,  (4*CELL_SIZE, 2*CELL_SIZE))  
+            screen.blit(medecin , (self.x * CELL_SIZE,
+                             self.y * CELL_SIZE))
+            pygame.display.flip()
+
+        # Afficher les helico
         elif self.deplacement == 'helico':
             helico = pygame.image.load("Projet-Python-/images/helico.png")
             helico = pygame.transform.scale(helico, (3*(CELL_SIZE-2),3* (CELL_SIZE-2)))
