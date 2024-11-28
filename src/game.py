@@ -11,7 +11,7 @@ class Game:
     ...
     Attributs
     ---------
-    screen: pygame.Surface
+
         La surface de la fenêtre du jeu.
     player_units : list[Unit]
         La liste des unités du joueur.
@@ -38,7 +38,7 @@ class Game:
         # Liste des maps avec un terrain spécifique
         self.maps = [
             { # Map 1
-                "terrain": "images/terrain_herbe.webp",  # Terrain de la map
+                "terrain": "Projet-Python-/images/terrain_herbe.webp",  # Terrain de la map
                 "cases": [  # Cases spécifiques de la map
                     Case(5, 5, 'mur'), Case(4, 5, 'mur'),
                     Case(0, 0, 'flag1'), Case(15, 15, 'flag2'),
@@ -46,7 +46,7 @@ class Game:
                 ]
             },
             { # Map 2
-                "terrain": "images/terrain_sables.png",
+                "terrain": "Projet-Python-/images/terrain_sables.png",
                 "cases": [
                     Case(0, 0, 'dune'), Case(3, 0, 'dune'), Case(6, 0, 'dune'), Case(9, 0, 'dune'),Case(12, 0, 'dune'),
                     Case(2, 1, 'flag1'), Case(14, 10, 'flag2'),
@@ -56,7 +56,7 @@ class Game:
             }
             ,
             { # Map 3
-                "terrain": "images/terrain_neige.png",
+                "terrain": "Projet-Python-/images/terrain_neige.png",
                 "cases": [
                     Case(6, 6, 'mur'), Case(7, 6, 'mur'),
                     Case(0, 7, 'flag1'), Case(15, 7, 'flag2'),
@@ -175,7 +175,7 @@ def main():
     
     # Charger les fresque
     try:
-        fresque = pygame.image.load("images/fresque.png")
+        fresque = pygame.image.load("Projet-Python-/images/fresque.png")
         fresque = pygame.transform.scale(fresque, (WIDTH,0.77*HEIGHT))  
     except pygame.error as e:
         print(f"Erreur lors du chargement de l'image : {e}")
