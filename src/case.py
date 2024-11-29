@@ -10,7 +10,8 @@ GRAY = (50, 50, 50)
 
 FPS = 30
 
-class Case:
+
+class Case :
     """
     Classe pour représenter une case.
 
@@ -47,7 +48,6 @@ class Case:
         self.y = y
         self.propriete = propriete 
         
-    
     def draw(self, screen):
         """Affiche les case sur l'écran."""
         
@@ -156,8 +156,8 @@ class Case:
             screen.blit(dune, (self.x * CELL_SIZE,
                                 self.y * CELL_SIZE))
             pygame.display.flip()
-        
 
+    
         # Map neige
         # Afficher les sapin
         elif self.propriete == 'sapin':
@@ -200,3 +200,4 @@ class Case:
             screen.blit(montagne, (self.x * CELL_SIZE,
                                 self.y * CELL_SIZE))
             pygame.display.flip()
+

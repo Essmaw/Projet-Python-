@@ -19,7 +19,7 @@ FPS = 30
 
 
 
-class Game:
+class Game :
     """
     Classe pour représenter le jeu.
 
@@ -71,24 +71,28 @@ class Game:
                 "terrain": "images/terrain_sables.png",
                 "cases": [
                     Case(0, 0, 'dune'), Case(3, 0, 'dune'), Case(6, 0, 'dune'), Case(9, 0, 'dune'),Case(12, 0, 'dune'),Case(15, 0, 'dune'),Case(17, 0, 'dune'),Case(20, 0, 'dune'),Case(23, 0, 'dune'),Case(25, 0, 'dune'),
-                    Case(2, 1, 'flag1'), Case(14, 10, 'flag2'),
-                    Case(3, 9, 'dune2'), Case(3, 8, 'dune2'),Case(10, 3, 'dune2'), Case(10, 4, 'dune2'),
-                    Case(13, 13, 'palmier'), Case(8, 8, 'palmier')
+                    Case(0, 11, 'flag1'), Case(22, 12, 'flag2'),
+                    Case(3, 9, 'dune2'), Case(3, 8, 'dune2'),Case(10, 3, 'dune2'),
+                    Case(10, 10, 'tente'), Case(2, 3, 'tente'),
+                    Case(0, 13, 'oasis'), Case(2, 13, 'oasis'), Case(19, 13, 'oasis'), Case(21, 13, 'oasis')
                 ]
             }
             ,
             { # Map 3
                 "terrain": "images/terrain_neige.png",
                 "cases": [
-                    Case(6, 6, 'mur'), Case(7, 6, 'mur'),
+                    Case(24, 0, 'montagne'), Case(21, 0, 'montagne'), Case(18, 0, 'montagne'), Case(15, 0, 'montagne'), Case(12, 0, 'montagne'),Case(9, 0, 'montagne'),Case(6, 0, 'montagne'),Case(3, 0, 'montagne'),Case(-1, 0, 'montagne'),
                     Case(0, 7, 'flag1'), Case(15, 7, 'flag2'),
-                    Case(5, 5, 'buisson'), Case(4, 4, 'arbre')
+                    Case(10, 10, 'glace'), Case(5, 3, 'glace'),Case(5, 4, 'glace'),
+                    Case(12, 10, 'bonhomme'), Case(2, 3, 'bonhomme'),
+                    Case(22, 1, 'sapin'), Case(21, 1, 'sapin'),Case(20, 1, 'sapin'), Case(19, 2, 'sapin'),Case(18, 1, 'sapin'),Case(22, 3, 'sapin'),Case(21, 2, 'sapin'),Case(20, 3, 'sapin'),Case(15, 5, 'sapin'),Case(10, 8, 'sapin'),Case(2, 12, 'sapin'),
+                    Case(0, 12, 'sapin'), Case(-1, 12, 'sapin'), Case(2, 13, 'sapin'),Case(2, 13, 'sapin'),Case(0, 13, 'sapin'),Case(1, 14, 'sapin'),Case(-1, 14, 'sapin'),Case(0, 14, 'sapin'),Case(2, 14, 'sapin'),Case(3, 14, 'sapin'),Case(4, 14, 'sapin'),Case(5, 14, 'sapin'),Case(6, 14, 'sapin'),Case(7, 14, 'sapin'),Case(8, 14, 'sapin'),Case(9, 14, 'sapin'),Case(10, 14, 'sapin') # Sapin
                 ]
             }
         ]
 
         # Sélection d'une map aléatoire
-        self.current_map = self.maps[0]
+        self.current_map = self.maps[2]
 
     def draw_map(self):
         """Affiche les cases spécifiques de la map actuelle."""
@@ -156,3 +160,65 @@ class Game:
 
         # Rafraîchir l'affichage complet
         pygame.display.flip()
+
+    def handle_player_turn(self):
+        """Tour du joueur"""
+        for selected_unit in self.player_units:
+
+            # Tant que l'unité n'a pas terminé son tour
+            has_acted = False
+            selected_unit.is_selected = True
+            self.flip_display()
+            while not has_acted:
+
+            # Important: cette boucle permet de gérer les événements Pygame
+                for event in pygame.event.get():
+
+                    # Gestion de la fermeture de la fenêtre
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        exit()
+
+                    # Gestion des touches du clavier
+                    if event.type == pygame.KEYDOWN:
+
+                        # Déplacement (touches fléchées)
+                        dx, dy = 0, 0
+                        if event.key == pygame.K_LEFT:
+                            dx = -1
+                        elif event.key == pygame.K_RIGHT:
+                            dx = 1
+                        elif event.key == pygame.K_UP:
+                                dy = -1
+                        elif event.key == pygame.K_DOWN:
+                                dy = 1
+
+                        selected_unit.move(dx, dy)
+                        self.flip_display()
+
+                        # Attaque (touche espace) met fin au tour
+                        if event.key == pygame.K_SPACE:
+                            for enemy in self.enemy_units:
+                                if abs(selected_unit.x - enemy.x) <= 1 and abs(selected_unit.y - enemy.y) <= 1:
+                                    selected_unit.attack(enemy)
+                                    if enemy.health <= 0:
+                                        self.enemy_units.remove(enemy)
+
+                            has_acted = True
+                            selected_unit.is_selected = False
+
+    def handle_enemy_turn(self):
+        """IA très simple pour les ennemis."""
+        for enemy in self.enemy_units:
+
+            # Déplacement aléatoire
+            target = random.choice(self.player_units)
+            dx = 1 if enemy.x < target.x else -1 if enemy.x > target.x else 0
+            dy = 1 if enemy.y < target.y else -1 if enemy.y > target.y else 0
+            enemy.move(dx, dy)
+
+            # Attaque si possible
+            if abs(enemy.x - target.x) <= 1 and abs(enemy.y - target.y) <= 1:
+                enemy.attack(target)
+                if target.health <= 0:
+                    self.player_units.remove(target)
