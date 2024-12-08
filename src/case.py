@@ -164,6 +164,14 @@ class Case :
             pygame.display.flip()
 
         # Map foret
+        # Afficher les murs
+        elif self.propriete == 'mur':
+            mur = pygame.image.load("images/mur.png")
+            mur = pygame.transform.scale(mur,  (CELL_SIZE, CELL_SIZE))  
+            screen.blit(mur, (self.x * CELL_SIZE,
+                                self.y * CELL_SIZE))
+            pygame.display.flip()
+
         # Afficher les tronc
         elif self.propriete == 'tronc':
             tronc = pygame.image.load("images/tronc.png")

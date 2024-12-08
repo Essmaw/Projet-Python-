@@ -43,7 +43,6 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-
         game.play_game()
         clock.tick(FPS)
 
