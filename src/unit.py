@@ -42,6 +42,11 @@ class Unit:
         Réinitialise la distance restante au début d'un tour.
     move(direction)
         Déplace l'unité dans une direction donnée au maximum de son périmètre.
+    definir_competences_autorisees(self)
+        Détermine les compétences disponibles pour l'unité en fonction de son type.
+    recevoir_dommage(self, dommage):
+        Mise a jour de health
+    recevoir_soin(self, soin):
     draw(screen)
         Dessine l'unité sur la grille.
     """
@@ -52,6 +57,7 @@ class Unit:
         self.team = team
         self.is_selected = False
         self.name = name 
+        self.competences_autorisees = self.definir_competences_autorisees()
 
         # Initialisation des capacités selon le type d'unité
         if self.name == 'soldat':
@@ -153,6 +159,33 @@ class Unit:
                     if target_case and target_case.effet.get("traversable", True):
                         cases_accessibles.append((new_x, new_y))
         return cases_accessibles
+
+    def definir_competences_autorisees(self):
+        """
+        Détermine les compétences disponibles pour l'unité en fonction de son type.
+        """
+        competences = []
+        if self.name == "medecin":
+            competences.append("Soin")
+        if self.name == "soldat":
+            competences.append("Arme à feu")
+            competences.append("Grenade")
+        if self.name == "helico":
+            competences.append("Arme à feu")
+            competences.append("Grenade")
+        if self.name== "char":
+            competences.append("Arme à feu")
+            competences.append("Grenade")
+        return competences
+    
+    def recevoir_dommage(self, dommage):
+        self.health -= dommage
+        print(f"{self.name} reçoit {dommage} points de dommage. Vie restante : {self.health}")
+
+    def recevoir_soin(self, soin):
+        self.health += soin
+        print(f"{self.name} récupère {soin} points de vie. Vie totale : {self.health}")
+        
 
 
     def draw(self, screen):

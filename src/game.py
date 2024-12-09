@@ -43,6 +43,8 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+        # Met à jour l'affichage
+        game.flip_display()
         game.play_game()
         clock.tick(FPS)
 

@@ -145,9 +145,6 @@ bouclier = Competence(
     portee=1,
     zone_effet=1,
     precision=100,
-    effet_special=lambda utilisateur, cibles, grille: [
-        setattr(cible, "defense", cible.defense + 20) for cible in cibles
-    ]
 )
 
 # Ajout des compétences dans le gestionnaire

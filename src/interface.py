@@ -109,6 +109,8 @@ class Game :
 
         # Initialisation de la grille avec toutes les cases traversables
         self.initialiser_grille()
+        self.font = pygame.font.Font("images/GameBoy.ttf", 10)
+
 
     def initialiser_grille(self):
         """
@@ -264,6 +266,7 @@ class Game :
                 y += 30
 
     
+            
 
     def handle_unit_turn(self, player_units, current_turn):
         """
@@ -280,9 +283,6 @@ class Game :
             unit.reset_distance()
         selected_unit = None
         has_acted = False
-        self.draw_instructions_select_unit()
-
-        
 
         while not has_acted:
 
@@ -331,11 +331,19 @@ class Game :
         while self.player1_units and self.player2_units:
             if current_turn == 'player1':
                 print("Tour du joueur 1.")
+                text = self.font.render('Tour du joueur 1', True, WHITE)
+                self.screen.blit(text, (game_width, 100))
+                self.draw_instructions_select_unit()
+                pygame.time.delay(200)
                 for unit in self.player1_units:
                     unit.reset_distance()
                 self.handle_unit_turn(self.player1_units, current_turn)
             else:
                 print("TTour du joueur 2.")
+                text = self.font.render('Tour du joueur 2', True, WHITE)
+                self.screen.blit(text, (game_width, 100))
+                self.draw_instructions_select_unit()
+                pygame.time.delay(200)
                 for unit in self.player2_units:
                     unit.reset_distance()
                 self.handle_unit_turn(self.player2_units, current_turn)
