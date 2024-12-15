@@ -1,4 +1,14 @@
-# Clash of Frontlines
+<h1 align="center">
+  <img style="vertical-align:middle; width:100%; position:fixed;"
+  src="images/banner.gif">
+</h1>
+<p  align="center">
+  <img src="https://img.shields.io/badge/Python-3.8.5-blue?style=flat-square&logo=python&logoColor=white">
+    <img src="https://img.shields.io/badge/Pygame-2.0.1-blue?style=flat-square&logo=pygame&logoColor=white">
+    <img src="https://img.shields.io/badge/Pygame_menu-4.0.3-blue?style=flat-square&logo=pygame&logoColor=white">
+    <img src="https://img.shields.io/badge/Pygame_widgets-2.0.3-blue?style=flat-square&logo=pygame&logoColor=white">
+    <img src="https://img.shields.io/badge/Pygame_gui-0.5.7-blue?style=flat-square&logo=pygame&logoColor=white">
+</p>
 
 ## Installation
 
@@ -10,12 +20,12 @@ git clone https://github.com/DanialSultani/Projet-Python-.git
 cd Projet-Python-
 ```
 
-
 2. Créer un environnement conda
 
 > Si vous n'avez pas conda, vous pouvez le télécharger [ici](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
 
 ```bash
+conda config --add channels conda-forge
 conda env create -f environment.yml
 ```
 
@@ -23,4 +33,13 @@ conda env create -f environment.yml
 
 ```bash
 conda activate clash_of_frontlines_env
+```
+
+
+## Lancer le jeu
+
+Pour lancer le jeu, il suffit de lancer le fichier `main.py` avec python
+
+```bash
+    python main.py
 ```
