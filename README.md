@@ -3,9 +3,8 @@
   src="images/banner.gif">
 </h1>
 <p  align="center">
-  <h2 align="center" style="font-family: 'Press Start 2P', cursive;">
-  Flags of Glory
-</h2>
+  <img style="vertical-align:middle; width:100%; position:fixed;"
+  src="images/title.png">
   <img src="https://img.shields.io/badge/Python-3.8.5-blue?style=flat-square&logo=python&logoColor=white">
     <img src="https://img.shields.io/badge/PlayStation%20Store-%230070D1.svg?logo=Playstation&logoColor=white" alt="PlayStation Store">
     <img src="https://img.shields.io/badge/Pygame-2.0.1-blue?style=flat-square&logo=pygame&logoColor=white">
