@@ -5,9 +5,8 @@
 <p  align="center">
   <img src="https://img.shields.io/badge/Python-3.8.5-blue?style=flat-square&logo=python&logoColor=white">
     <img src="https://img.shields.io/badge/Pygame-2.0.1-blue?style=flat-square&logo=pygame&logoColor=white">
-    <img src="https://img.shields.io/badge/Pygame_menu-4.0.3-blue?style=flat-square&logo=pygame&logoColor=white">
-    <img src="https://img.shields.io/badge/Pygame_widgets-2.0.3-blue?style=flat-square&logo=pygame&logoColor=white">
-    <img src="https://img.shields.io/badge/Pygame_gui-0.5.7-blue?style=flat-square&logo=pygame&logoColor=white">
+    <img src="https://img.shields.io/badge/PlayStation%20Store-%230070D1.svg?logo=Playstation&logoColor=white" alt="PlayStation Store">
+    </a>
 </p>
 
 ## Installation
