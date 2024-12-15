@@ -92,7 +92,7 @@ conda activate clash_of_frontlines_env
 Pour lancer le jeu, il suffit de lancer le fichier `main.py` avec python
 
 ```bash
-    python main.py
+    python src/game.py
 ```
 
 
